@@ -24,13 +24,14 @@ bot.command('id', async function (ctx) {
     ctx.reply('ID: ' + ctx.message.chat.id)
 })
 
-bot.command('i5', async function (ctx) {
+bot.command('i3', async function (ctx) {
     console.log('Iniciado !');
     var cont = 0, contMsg = 1,contImg =0;
     const browser = await puppeteer.launch({
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
 
     });
+
     const page = await browser.newPage()
 
     await page.goto('https://blaze.com/pt/games/double', { timeout: 0 })
@@ -84,6 +85,7 @@ bot.command('i5', async function (ctx) {
         if (total % 2 == 0 && final == 0) {
             
             ctx.telegram.sendMessage('-670713670', "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> 🔴 Vermelho\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
+            sleep(5000)
             await roleta();
             element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
             element1 = await page.evaluate(element1 => element1.textContent, element1)
@@ -103,6 +105,7 @@ bot.command('i5', async function (ctx) {
 
             } else {
                 console.log("aguardando G1")
+                sleep(5000)
                 await roleta();
                 element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
                 element1 = await page.evaluate(element1 => element1.textContent, element1)
@@ -121,6 +124,7 @@ bot.command('i5', async function (ctx) {
 
                 } else {
                     console.log("aguardando G2")
+                    sleep(5000)
                     await roleta();
                     element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
                     element1 = await page.evaluate(element1 => element1.textContent, element1)
@@ -151,6 +155,7 @@ bot.command('i5', async function (ctx) {
         } else if (final == 0) {
 
             ctx.telegram.sendMessage('-670713670', "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> ⚫️ Preto\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
+            sleep(5000)
             await roleta();
 
             element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
@@ -171,6 +176,7 @@ bot.command('i5', async function (ctx) {
 
             } else {
                 console.log("aguardando G1")
+                sleep(5000)
                 await roleta();
                 element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
                 element1 = await page.evaluate(element1 => element1.textContent, element1)
@@ -189,6 +195,7 @@ bot.command('i5', async function (ctx) {
 
                 } else {
                     console.log("aguardando G2")
+                    sleep(5000)
                     await roleta();
                     element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
                     element1 = await page.evaluate(element1 => element1.textContent, element1)
@@ -228,7 +235,8 @@ bot.command('i5', async function (ctx) {
 
 
 async function roleta() {
-
+    console.log('Await 10000 ms')
+    await sleep(10000)
     try {
 
 

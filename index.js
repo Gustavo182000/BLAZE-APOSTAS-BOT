@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer')
 const { Telegraf } = require('telegraf')
-const bot = new Telegraf('5303353120:AAERc1NsJJl-R2F3cLyn8QqTeGAjasCmBCQ')
+const bot = new Telegraf('5823241809:AAEN9MA2xIF4EGXgMQjj9PUBsWJRZs8h_2Q')
 // ID CHAT TESTES > -670713670
 // VIP -670713670
 

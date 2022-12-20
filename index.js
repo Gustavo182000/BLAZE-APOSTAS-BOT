@@ -47,6 +47,7 @@ bot.command('i5', async function (ctx) {
         var final = 0;
         cont = 0;
         await roleta();
+        console.log('Passou roleta procurando elementos')
         var element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
         var element1 = await page.evaluate(element1 => element1.textContent, element1)
 

@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer')
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf('5823241809:AAEN9MA2xIF4EGXgMQjj9PUBsWJRZs8h_2Q')
-// ID CHAT TESTES > -670713670
-// VIP -670713670
+// ID CHAT TESTES > -1001700898991
+// VIP -1001700898991
 
 const red = ['1', '2', '3', '6', '7', '5', '4'];
 const black = ['8', '12', '13', '10', '14', '11', '9']
@@ -73,18 +73,18 @@ bot.command('i3', async function (ctx) {
         var total = element1 + element2 + element3 + element4 + element5 + element6 + element7;
 
         if(contImg == 4){
-            await ctx.telegram.sendPhoto('-670713670','https://i.imgur.com/aGFngNa.png')
+            await ctx.telegram.sendPhoto('-1001700898991','https://i.imgur.com/aGFngNa.png')
             contMsg += 1;
         }
         if(contImg == 10){
-            await ctx.telegram.sendPhoto('-670713670','https://i.imgur.com/KnRjqab.png')
+            await ctx.telegram.sendPhoto('-1001700898991','https://i.imgur.com/KnRjqab.png')
             contImg=0;
             contMsg += 1;
         }
 
         if (total % 2 == 0 && final == 0) {
             
-            ctx.telegram.sendMessage('-670713670', "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> 🔴 Vermelho\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
+            ctx.telegram.sendMessage('-1001700898991', "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> 🔴 Vermelho\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
             sleep(5000)
             await roleta();
             element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
@@ -92,13 +92,13 @@ bot.command('i3', async function (ctx) {
             console.log('Resultado: ' + (red.indexOf(element1) > -1))
             if (red.indexOf(element1) > -1) {
                 console.log('Msg to edit: ' + ctx.message.message_id + contMsg)
-                ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
+                ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
 
                 final = 1
                 contMsg += 1;
                 contImg +=1;
             } else if (element1 == "") {
-                ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
+                ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
                 final = 1
                 contMsg += 1;
                 contImg +=1;
@@ -111,13 +111,13 @@ bot.command('i3', async function (ctx) {
                 element1 = await page.evaluate(element1 => element1.textContent, element1)
                 if (red.indexOf(element1) > -1) {
                     console.log('Msg to edit: ' + ctx.message.message_id)
-                    ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
+                    ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
 
                     final = 1
                     contMsg += 1;
                     contImg +=1;
                 } else if (element1 == "") {
-                    ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
+                    ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
                     final = 1
                     contMsg += 1;
                     contImg +=1;
@@ -130,19 +130,19 @@ bot.command('i3', async function (ctx) {
                     element1 = await page.evaluate(element1 => element1.textContent, element1)
                     if (red.indexOf(element1) > -1) {
                         console.log('Msg to edit: ' + ctx.message.message_id)
-                        ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
+                        ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
 
                         final = 1
                         contMsg += 1;
                         contImg +=1;
                     } else if (element1 == "") {
-                        ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
+                        ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
                         final = 1
                         contMsg += 1;
                         contImg +=1;
 
                     } else {
-                        ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "🔺LOSS\n 👨🏻‍💻 Analisando ...", { parse_mode: 'HTML' })
+                        ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "🔺LOSS\n 👨🏻‍💻 Analisando ...", { parse_mode: 'HTML' })
                         final = 1
                         contMsg += 1;
                         contImg +=1;
@@ -154,7 +154,7 @@ bot.command('i3', async function (ctx) {
 
         } else if (final == 0) {
 
-            ctx.telegram.sendMessage('-670713670', "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> ⚫️ Preto\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
+            ctx.telegram.sendMessage('-1001700898991', "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> ⚫️ Preto\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
             sleep(5000)
             await roleta();
 
@@ -163,13 +163,13 @@ bot.command('i3', async function (ctx) {
             console.log('Resultado: ' + (black.indexOf(element1) > -1))
             if (black.indexOf(element1) > -1) {
                 console.log('Msg to edit: ' + ctx.message.message_id)
-                ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
+                ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
                 contMsg += 1;
                 final = 1
                 contImg +=1;
 
             } else if (element1 == "") {
-                ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
+                ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
                 final = 1
                 contMsg += 1;
                 contImg +=1;
@@ -182,13 +182,13 @@ bot.command('i3', async function (ctx) {
                 element1 = await page.evaluate(element1 => element1.textContent, element1)
                 if (black.indexOf(element1) > -1) {
                     console.log('Msg to edit: ' + ctx.message.message_id)
-                    ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
+                    ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
 
                     final = 1
                     contMsg += 1;
                     contImg +=1;
                 } else if (element1 == "") {
-                    ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
+                    ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
                     final = 1
                     contMsg += 1;
                     contImg +=1;
@@ -201,19 +201,19 @@ bot.command('i3', async function (ctx) {
                     element1 = await page.evaluate(element1 => element1.textContent, element1)
                     if (black.indexOf(element1) > -1) {
                         console.log('Msg to edit: ' + ctx.message.message_id)
-                        ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
+                        ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
 
                         final = 1
                         contMsg += 1;
                         contImg +=1;
                     } else if (element1 == "") {
-                        ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
+                        ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
                         final = 1
                         contMsg += 1;
                         contImg +=1;
 
                     } else {
-                        ctx.telegram.editMessageText('-670713670', (ctx.message.message_id + contMsg), undefined, "🔺LOSS\n 👨🏻‍💻 Analisando ...", { parse_mode: 'HTML' })
+                        ctx.telegram.editMessageText('-1001700898991', (ctx.message.message_id + contMsg), undefined, "🔺LOSS\n 👨🏻‍💻 Analisando ...", { parse_mode: 'HTML' })
                         final = 1
                         contMsg += 1;
                         contImg +=1;
@@ -227,7 +227,7 @@ bot.command('i3', async function (ctx) {
 
         }
 
-        sleep(300000)
+        await sleep(600000)
     }
 
 

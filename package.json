@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^16.0.3",
     "faz-um-pix": "^2.0.2",
     "gpix": "^1.1.7",
     "puppeteer": "^19.4.1",
@@ -7,7 +8,7 @@
     "telegram-keyboard": "^2.3.1"
   },
   "scripts": {
-     "start": "node index",
-    "build": "npm install"
+    "start": "node index",
+    "build": "npm install && npm run build"
   }
 }

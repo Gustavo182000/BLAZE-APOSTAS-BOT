@@ -6,7 +6,7 @@ const bot = new Telegraf(process.env.API_KEY)
 
 const red = ['1', '2', '3', '6', '7', '5', '4'];
 const black = ['8', '12', '13', '10', '14', '11', '9']
-const idChat = "-1001700898991"
+const idChat = " "
 
 
 

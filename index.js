@@ -29,7 +29,7 @@ bot.command('id', async function (ctx) {
     ctx.reply('ID: ' + ctx.message.chat.id)
 })
 
-bot.command('i1', async function (ctx) {
+bot.command('start', async function (ctx) {
 
     ConsoleLog("START")
 

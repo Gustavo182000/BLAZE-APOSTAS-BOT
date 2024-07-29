@@ -1,14 +1,13 @@
+const { default: axios } = require('axios');
+const moment = require('moment');
 const puppeteer = require('puppeteer')
 const { Telegraf } = require('telegraf')
 require('dotenv').config()
 const bot = new Telegraf(process.env.API_KEY)
 
-
-const red = ['1', '2', '3', '6', '7', '5', '4'];
-const black = ['8', '12', '13', '10', '14', '11', '9']
+const black = [9, 13, 14, 8, 12, 11, 10];
+const red = [1, 2, 3, 4, 5, 7, 6]
 const idChat = process.env.ID_CHAT
-
-
 
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -25,248 +24,131 @@ bot.command('id', async function (ctx) {
 })
 
 bot.command('i1', async function (ctx) {
-    console.log('Iniciado !');
-    var cont = 0, contMsg = 1,contImg =0;
-    const browser = await puppeteer.launch({
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
 
-    });
-
-    const page = await browser.newPage()
-
-    await page.goto('https://blaze.com/pt/games/double', { timeout: 0 })
+    ConsoleLog("START")
 
     while (true) {
-        cont += 1;
-
-        console.log("Aguardando estrategia" + cont)
-        console.log('Msg to edit: ' + ctx.message.message_id + contMsg)
-        console.log('Contador IMG: '+contImg)
-        sleep(5000)
-
-        //Estratégia 1
-        var final = 0;
-        cont = 0;
-        await roleta();
-        console.log('Passou roleta procurando elementos')
-        var element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-        var element1 = await page.evaluate(element1 => element1.textContent, element1)
-
-        var element2 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(2)", { timeout: 0 })
-        var element2 = await page.evaluate(element2 => element2.textContent, element2)
-
-        var element3 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(3)", { timeout: 0 })
-        var element3 = await page.evaluate(element3 => element3.textContent, element3)
-
-        var element4 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(4)", { timeout: 0 })
-        var element4 = await page.evaluate(element4 => element4.textContent, element4)
-
-        var element5 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(5)", { timeout: 0 })
-        var element5 = await page.evaluate(element5 => element5.textContent, element5)
-
-        var element6 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(6)", { timeout: 0 })
-        var element6 = await page.evaluate(element6 => element6.textContent, element6)
-
-        var element7 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(7)", { timeout: 0 })
-        var element7 = await page.evaluate(element7 => element7.textContent, element7)
-
-        var total = element1 + element2 + element3 + element4 + element5 + element6 + element7;
-
-        if(contImg == 4){
-            await ctx.telegram.sendPhoto(idChat,'https://i.imgur.com/aGFngNa.png')
-            contMsg += 1;
-        }
-        if(contImg == 10){
-            await ctx.telegram.sendPhoto(idChat,'https://i.imgur.com/KnRjqab.png')
-            contImg=0;
-            contMsg += 1;
-        }
-
-        if (total % 2 == 0 && final == 0) {
-            
-            ctx.telegram.sendMessage(idChat, "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> 🔴 Vermelho\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
-            sleep(5000)
-            await roleta();
-            element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-            element1 = await page.evaluate(element1 => element1.textContent, element1)
-            console.log('Resultado: ' + (red.indexOf(element1) > -1))
-            if (red.indexOf(element1) > -1) {
-                console.log('Msg to edit: ' + ctx.message.message_id + contMsg)
-                ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
-
-                final = 1
-                contMsg += 1;
-                contImg +=1;
-            } else if (element1 == "") {
-                ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
-                final = 1
-                contMsg += 1;
-                contImg +=1;
-
-            } else {
-                console.log("aguardando G1")
-                sleep(5000)
-                await roleta();
-                element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-                element1 = await page.evaluate(element1 => element1.textContent, element1)
-                if (red.indexOf(element1) > -1) {
-                    console.log('Msg to edit: ' + ctx.message.message_id)
-                    ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
-
-                    final = 1
-                    contMsg += 1;
-                    contImg +=1;
-                } else if (element1 == "") {
-                    ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
-                    final = 1
-                    contMsg += 1;
-                    contImg +=1;
-
+        await sleep(10000);
+        try {
+            await roletaStatus("waiting");
+            var historico = await getHistorico();
+            var sinal = await gerarSinal(historico);
+            if (sinal == "Vermelho") {
+                const sinal = await ctx.telegram.sendMessage(idChat, "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> 🔴 Vermelho\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
+                const resultado = await verificarSinal("Vermelho");
+                if (resultado) {
+                    ConsoleLog("WIN")
+                    ctx.telegram.editMessageText(idChat, (sinal.message_id), undefined, "✅✅✅ <b>WIN</b> ✅✅✅", { parse_mode: 'HTML' })
                 } else {
-                    console.log("aguardando G2")
-                    sleep(5000)
-                    await roleta();
-                    element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-                    element1 = await page.evaluate(element1 => element1.textContent, element1)
-                    if (red.indexOf(element1) > -1) {
-                        console.log('Msg to edit: ' + ctx.message.message_id)
-                        ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
-
-                        final = 1
-                        contMsg += 1;
-                        contImg +=1;
-                    } else if (element1 == "") {
-                        ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
-                        final = 1
-                        contMsg += 1;
-                        contImg +=1;
-
-                    } else {
-                        ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "🔺LOSS\n 👨🏻‍💻 Analisando ...", { parse_mode: 'HTML' })
-                        final = 1
-                        contMsg += 1;
-                        contImg +=1;
-                    }
+                    ConsoleLog("LOSE")
+                    ctx.telegram.editMessageText(idChat, (sinal.message_id), undefined, "❌❌❌ <b>LOSE</b> ❌❌❌", { parse_mode: 'HTML' })
                 }
-
+            }
+            else {
+                const sinal = await ctx.telegram.sendMessage(idChat, "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> ⚫️ Preto\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n \t \t \t \t \t \t \t \t \t \t \t \t \t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
+                const resultado = await verificarSinal("Preto");
+                if (resultado) {
+                    ConsoleLog("WIN")
+                    ctx.telegram.editMessageText(idChat, (sinal.message_id), undefined, "✅✅✅ <b>WIN</b> ✅✅✅", { parse_mode: 'HTML' })
+                } else {
+                    ConsoleLog("LOSE")
+                    ctx.telegram.editMessageText(idChat, (sinal.message_id), undefined, "❌❌❌ <b>LOSE</b> ❌❌❌", { parse_mode: 'HTML' })
+                }
             }
 
-
-        } else if (final == 0) {
-
-            ctx.telegram.sendMessage(idChat, "⚠️ <b>SINAL CONFIRMADO</b>⚠️\n\n<b>⏩Entrar AGORA no:</b> ⚫️ Preto\n<b>⏩Proteção no:</b> ⚪️ Branco (Opcional)\n<b>⏩Aposte aqui:</b>  <a href='https://blaze.com/pt/games/double/'>Double</a>\n<b>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t03 ♻️</b>", { parse_mode: 'HTML', disable_web_page_preview: true })
-            sleep(5000)
-            await roleta();
-
-            element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-            element1 = await page.evaluate(element1 => element1.textContent, element1)
-            console.log('Resultado: ' + (black.indexOf(element1) > -1))
-            if (black.indexOf(element1) > -1) {
-                console.log('Msg to edit: ' + ctx.message.message_id)
-                ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
-                contMsg += 1;
-                final = 1
-                contImg +=1;
-
-            } else if (element1 == "") {
-                ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
-                final = 1
-                contMsg += 1;
-                contImg +=1;
-
-            } else {
-                console.log("aguardando G1")
-                sleep(5000)
-                await roleta();
-                element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-                element1 = await page.evaluate(element1 => element1.textContent, element1)
-                if (black.indexOf(element1) > -1) {
-                    console.log('Msg to edit: ' + ctx.message.message_id)
-                    ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
-
-                    final = 1
-                    contMsg += 1;
-                    contImg +=1;
-                } else if (element1 == "") {
-                    ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
-                    final = 1
-                    contMsg += 1;
-                    contImg +=1;
-
-                } else {
-                    console.log("aguardando G2")
-                    sleep(5000)
-                    await roleta();
-                    element1 = await page.waitForSelector("#roulette-recent > div > div.entries.main > div:nth-child(1)", { timeout: 0 })
-                    element1 = await page.evaluate(element1 => element1.textContent, element1)
-                    if (black.indexOf(element1) > -1) {
-                        console.log('Msg to edit: ' + ctx.message.message_id)
-                        ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "✅✅✅ <b>WIN</b> ✅✅✅\nO terror da blaze 🤑🚀", { parse_mode: 'HTML' })
-
-                        final = 1
-                        contMsg += 1;
-                        contImg +=1;
-                    } else if (element1 == "") {
-                        ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "⚪️✅✅ <b>WIN</b> ✅✅⚪️\n⚪️⚪️⚪️ Quebramos a blaze 🤑🚀 ⚪️⚪️⚪️", { parse_mode: 'HTML' })
-                        final = 1
-                        contMsg += 1;
-                        contImg +=1;
-
-                    } else {
-                        ctx.telegram.editMessageText(idChat, (ctx.message.message_id + contMsg), undefined, "🔺LOSS\n 👨🏻‍💻 Analisando ...", { parse_mode: 'HTML' })
-                        final = 1
-                        contMsg += 1;
-                        contImg +=1;
-                    }
-                }
-
-            }
-
-
-
-
+        } catch (err) {
+            ConsoleLog(err)
         }
 
-        await sleep(600000)
     }
-
 
 })
 
+const ConsoleLog = (msg) => {
+    ConsoleLog(`[${moment().format('HH:mm:ss')}] ${msg}`);
+}
 
-async function roleta() {
-    console.log('Await 10000 ms')
-    await sleep(10000)
+const roletaStatus = async (status) => {
+    ConsoleLog(`Aguardando status: ${status}`)
     try {
 
-
-        var giro = 0;
-        const browser = await puppeteer.launch({
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    
-        });
-        const page = await browser.newPage()
-
-        await page.goto('https://blaze.com/pt/games/double', { timeout: 0 })
-        while (giro == 0) {
-
-            var element = await page.waitForSelector("#roulette-timer > div > div.time-left", { timeout: 0 })
-            var element = await page.evaluate(element => element.textContent, element)
-
-            if (element.includes('em 14:')) {
-                console.log('Iniciando Roleta > ' + element)
-                browser.close();
-                giro = 1;
-
+        while (true) {
+            var atual = await getAtual();
+            if (atual.status == status) {
+                return;
             }
-
         }
 
     } catch (err) {
-        console.log(err)
+        ConsoleLog(err)
     }
 }
 
+const getAtual = async () => {
+    try {
+        const atual = await axios.get('https://blaze.com/api/roulette_games/current');
+        return atual.data;
+
+    } catch (err) {
+        ConsoleLog(err)
+    }
+}
+
+const getHistorico = async () => {
+    ConsoleLog("Pegando histórico")
+    try {
+
+        const historico = await axios.get('https://blaze.com/api/roulette_games/recent');
+        await gerarSinal(historico.data)
+
+        return historico.data;
+
+    } catch (err) {
+        ConsoleLog(err)
+    }
+}
+
+const gerarSinal = async (historico) => {
+    ConsoleLog("Gerando sinal")
+    var total = 0;
+    for (var i = 0; i < 6; i++) {
+        total += historico[i].roll;
+    }
+    if (total % 2 == 0) {
+        return "Vermelho";
+    }
+    return "Preto";
+}
+
+const verificarSinal = async (sinal) => {
+    ConsoleLog(`Verificando sinal: ${sinal}`)
+    try {
+
+        while (true) {
+            const atual = await axios.get('https://blaze.com/api/roulette_games/current');
+            if (atual.data.status == "complete") {
+
+                if (sinal == "Vermelho") {
+                    if (red.includes(atual.data.roll)) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                if (sinal == "Preto") {
+                    if (black.includes(atual.data.roll)) {
+                        return true;
+                    }
+                    return false;
+                }
+
+            }
+        }
+
+    } catch (err) {
+        ConsoleLog(err)
+    }
+}
 
 
 bot.startPolling();

@@ -4,6 +4,12 @@ const puppeteer = require('puppeteer')
 const { Telegraf } = require('telegraf')
 require('dotenv').config()
 const bot = new Telegraf(process.env.API_KEY)
+const brain = require('brain.js');
+const fs = require('fs');
+
+const net = new brain.NeuralNetwork();
+const jsonModel = JSON.parse(fs.readFileSync('model.json', 'utf8'));
+net.fromJSON(jsonModel);
 
 const black = [9, 13, 14, 8, 12, 11, 10];
 const red = [1, 2, 3, 4, 5, 7, 6]
@@ -57,7 +63,7 @@ bot.command('i1', async function (ctx) {
             }
 
         } catch (err) {
-            ConsoleLog(err)
+            ConsoleLog(err.toString())
         }
 
     }
@@ -65,7 +71,7 @@ bot.command('i1', async function (ctx) {
 })
 
 const ConsoleLog = (msg) => {
-    ConsoleLog(`[${moment().format('HH:mm:ss')}] ${msg}`);
+    console.log(`[${moment().format('HH:mm:ss')}] ${msg}`);
 }
 
 const roletaStatus = async (status) => {
@@ -80,7 +86,7 @@ const roletaStatus = async (status) => {
         }
 
     } catch (err) {
-        ConsoleLog(err)
+        ConsoleLog(err.toString())
     }
 }
 
@@ -90,7 +96,7 @@ const getAtual = async () => {
         return atual.data;
 
     } catch (err) {
-        ConsoleLog(err)
+        ConsoleLog(err.toString())
     }
 }
 
@@ -104,20 +110,18 @@ const getHistorico = async () => {
         return historico.data;
 
     } catch (err) {
-        ConsoleLog(err)
+        ConsoleLog(err.toString())
     }
 }
 
 const gerarSinal = async (historico) => {
     ConsoleLog("Gerando sinal")
-    var total = 0;
-    for (var i = 0; i < 6; i++) {
-        total += historico[i].roll;
+    var sinal = net.run([historico[0].roll, historico[1].roll, historico[2].roll]);
+    if (black.includes(sinal)) {
+        return "Preto";
     }
-    if (total % 2 == 0) {
-        return "Vermelho";
-    }
-    return "Preto";
+    return "Vermelho";
+
 }
 
 const verificarSinal = async (sinal) => {
@@ -146,7 +150,7 @@ const verificarSinal = async (sinal) => {
         }
 
     } catch (err) {
-        ConsoleLog(err)
+        ConsoleLog(err.toString())
     }
 }
 

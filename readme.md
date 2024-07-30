@@ -2,7 +2,7 @@
 # BLAZE-APOSTAS-BOT
 
 
-O objetivo deste projeto é gerar sinais de aposta no jogo [double](https://blaze.com/pt/games/double), enviar os sinais no telegram e monitorar a perca ou a vitória. 
+O objetivo deste projeto é gerar sinais de aposta no jogo [double](https://blaze.com/pt/games/double), enviar os sinais no telegram e monitorar a perca ou a vitória utilizando redes neurais. 
 ## Instalação
 
 Instale BLAZE-APOSTAS-BOT com npm
